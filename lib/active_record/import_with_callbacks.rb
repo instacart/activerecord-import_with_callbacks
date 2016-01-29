@@ -1,5 +1,6 @@
 require 'active_record'
 require 'activerecord-import/base'
+require 'active_record/import'
 require 'fiber'
 
 module ActiveRecord

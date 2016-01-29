@@ -159,4 +159,16 @@ describe ActiveRecord::ImportWithCallbacks do
     expect(Product.last).to be_nil
     expect(Item.last).to be_nil
   end
+
+  it 'inserts associated polymorphic records' do
+    brand = Brand.new(name: 'Brand 2')
+    product = Product.new(name: 'Product')
+    discount = Discount.new(percent_off: 20)
+    brand.products << product
+    product.discounts << discount
+    Brand.import_with_callbacks([brand])
+    expect(product.discounts.last.id).to eq(Discount.last.id)
+    expect(Discount.last.discountable_id).to eq(product.id)
+    expect(Discount.last.discountable_type).to eq('Product')
+  end
 end
