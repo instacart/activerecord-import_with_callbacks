@@ -1,5 +1,13 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
+require 'simplecov'
+
+SimpleCov.start do
+  add_filter '/spec/'
+  add_filter '/vendor/'
+  minimum_coverage(100)
+end
+
 require 'active_record'
 
 spec_dir = Pathname.new File.dirname(__FILE__)
