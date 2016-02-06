@@ -11,6 +11,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'database_cleaner'
   gem 'rspec', '~> 3.0'
   gem 'simplecov'
 end

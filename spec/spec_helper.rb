@@ -25,3 +25,18 @@ Dir[spec_dir.join('models/*.rb')].each { |file| require_relative file }
 require 'active_record/import_with_callbacks'
 
 ActiveRecord::Import.require_adapter('postgresql')
+
+require 'database_cleaner'
+
+RSpec.configure do |config|
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+end
