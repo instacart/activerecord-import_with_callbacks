@@ -20,7 +20,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+users = Array.new(200) { |i| User.new(name: "User #{i}") }
+# Default batch size is 100 but can be overridden
+result = User.import_with_callbacks(users, batch_size: 50)
+result.num_inserts       #=> 4
+result.ids.size          #=> 200
+result.failed_instances  #=> []
+```
 
 ## Development
 
