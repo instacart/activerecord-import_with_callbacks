@@ -1,0 +1,6 @@
+test:
+  pool: 5
+  timeout: 5000
+  adapter: postgresql
+  database: activerecord-import_with_callbacks
+  encoding: unicode

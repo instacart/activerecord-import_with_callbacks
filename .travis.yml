@@ -1,4 +1,5 @@
 ---
+before_script: createdb activerecord-import_with_callbacks
 cache: bundler
 language: ruby
 rvm:
