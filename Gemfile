@@ -1,4 +1,11 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in activerecord-import_with_callbacks.gemspec
 gemspec
+
+group :development, :test do
+  gem 'rake', '~> 10.0'
+end
+
+group :test do
+  gem 'rspec', '~> 3.0'
+end
