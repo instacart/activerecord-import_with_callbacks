@@ -1,11 +1,13 @@
 require 'active_record'
 require 'activerecord-import/base'
+require 'active_record/import'
 require 'fiber'
 
 module ActiveRecord
   module ImportWithCallbacks
     Result = Class.new(ActiveRecord::Import::Result)
     DEFAULT_BATCH_SIZE = 100
+    DEFAULT_RECURSIVE = true
     extend ActiveSupport::Concern
 
     # Insert multiple records in batches with callbacks
@@ -24,6 +26,7 @@ module ActiveRecord
       options = args.extract_options!
       records = args.pop
       options[:batch_size] = DEFAULT_BATCH_SIZE unless options.key?(:batch_size)
+      options[:recursive] = DEFAULT_RECURSIVE unless options.key?(:recursive)
       import_in_transaction(records, options)
     end
 

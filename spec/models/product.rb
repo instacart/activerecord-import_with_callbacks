@@ -18,6 +18,7 @@ class Product < ActiveRecord::Base
   after_save :after_save_callback_if_false, if: FALSE_PROC
   after_commit :after_commit_callback_if_false, if: FALSE_PROC
   belongs_to :brand
+  has_many :items
   validates :name, presence: true
   validates :name, uniqueness: true
 

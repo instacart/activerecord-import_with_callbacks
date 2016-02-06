@@ -1,4 +1,9 @@
 ---
+AllCops:
+  Exclude:
+    - lib/active_record/import.rb
+Rails:
+  Enabled: true
 Style/Documentation:
   Enabled: false
 Style/FileName:

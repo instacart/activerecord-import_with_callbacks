@@ -137,4 +137,26 @@ describe ActiveRecord::ImportWithCallbacks do
                   after_commit_callback)
     expect(product.history).to eq(expected)
   end
+
+  it 'inserts child records recursively' do
+    brand = Brand.new(name: 'Brand 2')
+    product = Product.new(name: 'Product')
+    item = Item.new(price: 100)
+    brand.products << product
+    product.items << item
+    Brand.import_with_callbacks([brand])
+    expect(item.product_id).to eq(Product.last.id)
+    expect(product.brand_id).to eq(Brand.last.id)
+  end
+
+  it 'does not insert child records recursively if option is set to false' do
+    brand = Brand.new(name: 'Brand 2')
+    product = Product.new(name: 'Product')
+    item = Item.new(price: 100)
+    brand.products << product
+    product.items << item
+    Brand.import_with_callbacks([brand], recursive: false)
+    expect(Product.last).to be_nil
+    expect(Item.last).to be_nil
+  end
 end
