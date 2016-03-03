@@ -15,7 +15,7 @@ class ActiveRecord::Base
           child.send("#{association_reflection.foreign_key}=", model.id)
           # For polymorphic associations
           association_reflection.type.try do |type|
-            child.send("#{type}=", model.name)
+            child.send("#{type}=", model.class.name)
           end
         end
         associated_objects_by_class[model.class.name][association_reflection.name].concat changed_objects

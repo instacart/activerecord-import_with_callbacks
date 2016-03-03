@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe ActiveRecord::ImportWithCallbacks do
-  let(:brand) { Brand.create(name: 'Brand') }
+  let(:brand) { Brand.create(name: 'Brand 1') }
 
-  let(:product) { Product.new(brand: brand, name: 'Product') }
+  let(:product) { Product.new(brand: brand, name: 'Product 1') }
 
   it 'has a version number' do
     expect(ActiveRecord::ImportWithCallbacks::VERSION).not_to be nil
@@ -140,7 +140,7 @@ describe ActiveRecord::ImportWithCallbacks do
 
   it 'inserts child records recursively' do
     brand = Brand.new(name: 'Brand 2')
-    product = Product.new(name: 'Product')
+    product = Product.new(name: 'Product 2')
     item = Item.new(price: 100)
     brand.products << product
     product.items << item
@@ -151,7 +151,7 @@ describe ActiveRecord::ImportWithCallbacks do
 
   it 'does not insert child records recursively if option is set to false' do
     brand = Brand.new(name: 'Brand 2')
-    product = Product.new(name: 'Product')
+    product = Product.new(name: 'Product 2')
     item = Item.new(price: 100)
     brand.products << product
     product.items << item
@@ -162,7 +162,7 @@ describe ActiveRecord::ImportWithCallbacks do
 
   it 'inserts associated polymorphic records' do
     brand = Brand.new(name: 'Brand 2')
-    product = Product.new(name: 'Product')
+    product = Product.new(name: 'Product 2')
     discount = Discount.new(percent_off: 20)
     brand.products << product
     product.discounts << discount
