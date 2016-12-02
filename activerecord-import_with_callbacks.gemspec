@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/instacart/activerecord-import_with_callbacks'
   spec.license = 'MIT'
 
-  spec.files = `git ls-files`.split("\n").reject { |f| f.start_with?('spec/') }
+  spec.files = Dir["{lib}/**/*", "Rakefile", "README.*", "LICENSE.*", "activerecord-import_with_callbacks.gemspec"]
   spec.require_paths = ['lib']
 
   spec.required_ruby_version = '~> 2.2'
