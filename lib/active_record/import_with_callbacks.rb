@@ -32,7 +32,7 @@ module ActiveRecord
     private
 
     def import_in_transaction(records, options)
-      Base.transaction do
+      self.transaction do
         import_in_batches(records, options)
       end
     end
